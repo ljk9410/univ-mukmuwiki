@@ -4,9 +4,9 @@ import Script from 'next/script';
 import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Sidebar from './Sidebar';
+import { calculateDistance } from '../utiles';
 
 const CAUPos = { lat: 37.504647, lng: 126.957073 };
-const CAUPos2 = { lat: 37.5, lng: 126.95 };
 
 const MainView = () => {
 	const [clickPos, setClickPos] = useState<{
@@ -16,10 +16,22 @@ const MainView = () => {
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
 	const handleClickMap = (_: any, mouseEvent: kakao.maps.event.MouseEvent) => {
-		if (mouseEvent.latLng) {
+		if (!mouseEvent.latLng) return;
+
+		const lat = mouseEvent.latLng.getLat();
+		const lng = mouseEvent.latLng.getLng();
+
+		if (
+			calculateDistance(CAUPos, {
+				lat,
+				lng,
+			}) > 1
+		) {
+			alert('너무 멀어요 ㅠㅠ');
+		} else {
 			setClickPos({
-				lat: mouseEvent.latLng.getLat(),
-				lng: mouseEvent.latLng.getLng(),
+				lat,
+				lng,
 			});
 		}
 	};
@@ -38,7 +50,9 @@ const MainView = () => {
 				center={CAUPos}
 				style={{ width: '100%', height: '100%' }}
 				level={3}
+				minLevel={4}
 				onClick={handleClickMap}
+				onZoomChanged={(e) => console.log(e.getLevel())}
 			>
 				<MapMarker position={CAUPos} onClick={handleClickMarker} />
 				{clickPos && (
