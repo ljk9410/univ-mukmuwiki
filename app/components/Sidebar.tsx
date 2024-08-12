@@ -1,6 +1,11 @@
 import { Transition } from '@headlessui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import {
+	Bars3Icon,
+	ChevronLeftIcon,
+	ChevronRightIcon,
+} from '@heroicons/react/24/outline';
 import { Dispatch, SetStateAction } from 'react';
+import SidebarButton from './SidebarButton';
 
 type Props = {
 	isOpen: boolean;
@@ -13,31 +18,30 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 	};
 
 	return (
-		<Transition
-			show={isOpen}
-			enter="transition-transform duration-500"
-			enterFrom="-translate-x-full"
-			enterTo="translate-x-0"
-			leave="transition-transform duration-500"
-			leaveFrom="translate-x-0"
-			leaveTo="-translate-x-full"
-		>
-			<aside className="z-10 fixed left-0 top-0 h-full flex">
-				<div className="w-64 bg-slate-50 shadow-right">
-					<p>사이드바</p>
+		<div className="z-10 relative flex">
+			<div className="z-50 fixed left-0 top-0 h-full flex items-center">
+				<div className="w-16 h-full flex bg-slate-50 shadow-right">
+					<p>로고박스</p>
 				</div>
-				<button
-					className="-z-10 w-5 h-11 self-center flex items-center bg-white hover:bg-blue-100 rounded-r-lg border-t-[1px] border-r-[1px] border-b-[1px] border-[rgba(222,222,222)] border-opacity-50"
-					onClick={handleSidebarToggleBtn}
-				>
-					{isOpen ? (
-						<ChevronLeftIcon className="w-[16px]" />
-					) : (
-						<ChevronRightIcon className="w-[16px]" />
-					)}
-				</button>
-			</aside>
-		</Transition>
+			</div>
+			<Transition
+				show={isOpen}
+				enter="transition-transform duration-500"
+				enterFrom="left-16 -translate-x-full"
+				enterTo="left-0 translate-x-0"
+				leave="transition-all duration-500"
+				leaveFrom="left-0 translate-x-0"
+				leaveTo="left-16 -translate-x-full"
+			>
+				<aside className="fixed z-10 left-16 top-0 h-full w-72 bg-slate-50 shadow-right flex">
+					<p>사이드바</p>
+					<SidebarButton
+						isOpen={isOpen}
+						handleSidebarToggleBtn={handleSidebarToggleBtn}
+					/>
+				</aside>
+			</Transition>
+		</div>
 	);
 };
 
