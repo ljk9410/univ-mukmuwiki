@@ -33,10 +33,11 @@ const MainView = () => {
 				lat,
 				lng,
 			});
+			setIsOpenSidebar(true);
 		}
 	};
 	const handleClickMarker = () => {
-		setIsOpenSidebar(!isOpenSidebar);
+		setIsOpenSidebar(true);
 	};
 
 	return (

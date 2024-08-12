@@ -1,11 +1,7 @@
 import { Transition } from '@headlessui/react';
-import {
-	Bars3Icon,
-	ChevronLeftIcon,
-	ChevronRightIcon,
-} from '@heroicons/react/24/outline';
 import { Dispatch, SetStateAction } from 'react';
 import SidebarButton from './SidebarButton';
+import PostView from './PostView';
 
 type Props = {
 	isOpen: boolean;
@@ -19,11 +15,13 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 
 	return (
 		<div className="z-10 relative flex">
-			<div className="z-50 fixed left-0 top-0 h-full flex items-center">
-				<div className="w-16 h-full flex bg-slate-50 shadow-right">
-					<p>로고박스</p>
-				</div>
-			</div>
+			<header
+				className={`z-50 fixed w-16 left-0 top-0 h-full flex bg-slate-50 ${
+					!isOpen ? 'shadow-right' : 'border-r-[1px] border-t-slate-950'
+				}`}
+			>
+				<p>로고박스</p>
+			</header>
 			<Transition
 				show={isOpen}
 				enter="transition-transform duration-500"
@@ -34,7 +32,7 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 				leaveTo="left-16 -translate-x-full"
 			>
 				<aside className="fixed z-10 left-16 top-0 h-full w-72 bg-slate-50 shadow-right flex">
-					<p>사이드바</p>
+					<PostView />
 					<SidebarButton
 						isOpen={isOpen}
 						handleSidebarToggleBtn={handleSidebarToggleBtn}
