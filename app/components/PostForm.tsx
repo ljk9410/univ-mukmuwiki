@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Post } from '../lib/types';
-import { addPostData } from '../api/postAPI';
+import { addPostData, updatePostData } from '../api/postAPI';
 
 const PostForm = () => {
 	const [postData, setPostData] = useState<Post>({
 		name: '',
 		image: {},
 		content: '',
+		university: '',
 	});
 
 	const handleChangeText = (
@@ -22,7 +23,8 @@ const PostForm = () => {
 		e.preventDefault();
 
 		try {
-			await addPostData(postData);
+			// 만약 id가 없으면 add 있으면 update로
+			await updatePostData('qzgJTQXywuJM5qiiKjTP', postData);
 		} catch (error) {}
 	};
 

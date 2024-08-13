@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Sidebar from './Sidebar';
 import { calculateDistance } from '../utiles';
+import { useCurUniversityStore } from '../store/restaurantStore';
 
 const CAUPos = { lat: 37.504647, lng: 126.957073 };
 
@@ -14,6 +15,8 @@ const MainView = () => {
 		lng: number;
 	}>();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+	const { university, setUniversity } = useCurUniversityStore();
+	console.log('1111111:', university);
 
 	const handleClickMap = (_: any, mouseEvent: kakao.maps.event.MouseEvent) => {
 		if (!mouseEvent.latLng) return;
@@ -34,6 +37,7 @@ const MainView = () => {
 				lng,
 			});
 			setIsOpenSidebar(true);
+			setUniversity('CAU');
 		}
 	};
 	const handleClickMarker = () => {
