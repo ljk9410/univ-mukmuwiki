@@ -2,6 +2,7 @@ import { Transition } from '@headlessui/react';
 import { Dispatch, SetStateAction } from 'react';
 import SidebarButton from './SidebarButton';
 import PostView from './PostView';
+import PostForm from './PostForm';
 
 type Props = {
 	isOpen: boolean;
@@ -32,7 +33,8 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 				leaveTo="left-16 -translate-x-full"
 			>
 				<aside className="fixed z-10 left-16 top-0 h-full w-72 bg-slate-50 shadow-right flex">
-					<PostView />
+					{/* <PostView /> */}
+					<PostForm />
 					<SidebarButton
 						isOpen={isOpen}
 						handleSidebarToggleBtn={handleSidebarToggleBtn}

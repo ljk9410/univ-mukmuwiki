@@ -53,7 +53,6 @@ const MainView = () => {
 				level={3}
 				minLevel={4}
 				onClick={handleClickMap}
-				onZoomChanged={(e) => console.log(e.getLevel())}
 			>
 				<MapMarker position={CAUPos} onClick={handleClickMarker} />
 				{clickPos && (
