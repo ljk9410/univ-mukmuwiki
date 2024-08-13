@@ -15,3 +15,16 @@ export interface Post {
 	content: string;
 	university: string;
 }
+
+export interface UniversityState {
+	university: string;
+	setUniversity: (university: string) => void;
+}
+
+export interface CurSelectedPosState {
+	curSelectedPos: {
+		lat: number;
+		lng: number;
+	};
+	setCurSelectedPos: (curSelectedPos: { lat: number; lng: number }) => void;
+}

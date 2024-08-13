@@ -1,22 +1,25 @@
 'use client';
 
 import Script from 'next/script';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Sidebar from './Sidebar';
 import { calculateDistance } from '../utiles';
-import { useCurUniversityStore } from '../store/restaurantStore';
+import {
+	useCurSelectedPosStore,
+	useCurUniversityStore,
+} from '../store/restaurantStore';
 
 const CAUPos = { lat: 37.504647, lng: 126.957073 };
 
 const MainView = () => {
-	const [clickPos, setClickPos] = useState<{
-		lat: number;
-		lng: number;
-	}>();
+	const { setUniversity } = useCurUniversityStore();
+	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-	const { university, setUniversity } = useCurUniversityStore();
-	console.log('1111111:', university);
+
+	useEffect(() => {
+		setUniversity('CAU'); // TODO: 학교별 나누기
+	}, []);
 
 	const handleClickMap = (_: any, mouseEvent: kakao.maps.event.MouseEvent) => {
 		if (!mouseEvent.latLng) return;
@@ -32,12 +35,11 @@ const MainView = () => {
 		) {
 			alert('너무 멀어요 ㅠㅠ');
 		} else {
-			setClickPos({
+			setCurSelectedPos({
 				lat,
 				lng,
 			});
 			setIsOpenSidebar(true);
-			setUniversity('CAU');
 		}
 	};
 	const handleClickMarker = () => {
@@ -59,9 +61,9 @@ const MainView = () => {
 				onClick={handleClickMap}
 			>
 				<MapMarker position={CAUPos} onClick={handleClickMarker} />
-				{clickPos && (
+				{curSelectedPos && (
 					<MapMarker
-						position={clickPos}
+						position={curSelectedPos}
 						image={{
 							src: '/icon-192x192.png', // 커스텀 마커
 							size: {

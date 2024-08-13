@@ -1,8 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Post } from '../lib/types';
 import { addPostData, updatePostData } from '../api/postAPI';
+import {
+	useCurSelectedPosStore,
+	useCurUniversityStore,
+} from '../store/restaurantStore';
 
 const PostForm = () => {
+	const { university } = useCurUniversityStore();
+	const { curSelectedPos } = useCurSelectedPosStore();
 	const [postData, setPostData] = useState<Post>({
 		name: '',
 		image: {},
@@ -23,9 +29,18 @@ const PostForm = () => {
 		e.preventDefault();
 
 		try {
-			// 만약 id가 없으면 add 있으면 update로
-			await updatePostData('qzgJTQXywuJM5qiiKjTP', postData);
-		} catch (error) {}
+			if (postData?.id || postData?.latLng) {
+				await updatePostData('qzgJTQXywuJM5qiiKjTP', postData);
+			} else {
+				await addPostData({
+					...postData,
+					latLng: curSelectedPos,
+					university: university,
+				});
+			}
+		} catch (error) {
+			// TODO: 에러 추적 기능 넣기
+		}
 	};
 
 	return (

@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction } from 'react';
 import SidebarButton from './SidebarButton';
 import PostView from './PostView';
 import PostForm from './PostForm';
-import { useCurUniversityStore } from '../store/restaurantStore';
 
 type Props = {
 	isOpen: boolean;
@@ -11,9 +10,6 @@ type Props = {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
-	const { university } = useCurUniversityStore();
-	console.log('22222222:', university);
-
 	const handleSidebarToggleBtn = () => {
 		setIsOpen(!isOpen);
 	};
