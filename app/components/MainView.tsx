@@ -9,10 +9,15 @@ import {
 	useCurSelectedPosStore,
 	useCurUniversityStore,
 } from '../store/restaurantStore';
+import { Post } from '../lib/types';
 
 const CAUPos = { lat: 37.504647, lng: 126.957073 };
 
-const MainView = () => {
+interface Props {
+	postDataList: Post[];
+}
+
+const MainView = ({ postDataList }: Props) => {
 	const { setUniversity } = useCurUniversityStore();
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -61,11 +66,28 @@ const MainView = () => {
 				onClick={handleClickMap}
 			>
 				<MapMarker position={CAUPos} onClick={handleClickMarker} />
+				{postDataList.map((post) => {
+					if (post.latLng) {
+						return (
+							<MapMarker
+								position={post.latLng}
+								image={{
+									src: '/icon-192x192.png', // 커스텀 마커
+									size: {
+										width: 32,
+										height: 32,
+									},
+								}}
+								onClick={handleClickMarker}
+							/>
+						);
+					}
+				})}
 				{curSelectedPos && (
 					<MapMarker
 						position={curSelectedPos}
 						image={{
-							src: '/icon-192x192.png', // 커스텀 마커
+							src: '/icon-192x192.png', // TODO: 아이콘 이미지 변경
 							size: {
 								width: 32,
 								height: 32,

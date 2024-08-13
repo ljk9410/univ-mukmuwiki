@@ -16,12 +16,13 @@ export const getPostData = async (collectionName: string) => {
 	const docSnap = await getDocs(collection(db, collectionName));
 	const data: Post[] = docSnap.docs.map((doc) => {
 		const docData = doc.data();
+
 		return {
 			id: doc.id,
 			name: docData.name,
 			latLng: {
-				lat: docData.lat,
-				lng: docData.lng,
+				lat: docData.latLng.lat,
+				lng: docData.latLng.lng,
 			},
 			address: docData.address,
 			zipcode: docData.zipcode,

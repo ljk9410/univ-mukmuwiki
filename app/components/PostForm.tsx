@@ -7,6 +7,8 @@ import {
 } from '../store/restaurantStore';
 
 const PostForm = () => {
+	// TODO: 처음 눌렀을 때 해당 데이터는 없어요! 추가해주시겠어요? 라는 단계 추가하기, 편집모드로 구분하기
+
 	const { university } = useCurUniversityStore();
 	const { curSelectedPos } = useCurSelectedPosStore();
 	const [postData, setPostData] = useState<Post>({
