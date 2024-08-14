@@ -1,17 +1,22 @@
 import { Transition } from '@headlessui/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import SidebarButton from './SidebarButton';
 import PostView from './PostView';
 import PostForm from './PostForm';
+import { Post } from '../lib/types';
 
 type Props = {
 	isOpen: boolean;
+	existingPost: Post | undefined;
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Sidebar = ({ isOpen, setIsOpen }: Props) => {
+const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
+	const [editMode, setEditMode] = useState(false);
+
 	const handleSidebarToggleBtn = () => {
 		setIsOpen(!isOpen);
+		setEditMode(false);
 	};
 
 	return (
@@ -32,9 +37,14 @@ const Sidebar = ({ isOpen, setIsOpen }: Props) => {
 				leaveFrom="left-0 translate-x-0"
 				leaveTo="left-16 -translate-x-full"
 			>
-				<aside className="fixed z-10 left-16 top-0 h-full w-72 bg-slate-50 shadow-right flex">
-					{/* <PostView /> */}
-					<PostForm />
+				<aside className="fixed z-10 left-16 top-0 h-full w-[384px] bg-slate-50 shadow-right flex">
+					{editMode ? (
+						<PostForm />
+					) : existingPost ? (
+						<PostView post={existingPost} setEditMode={setEditMode} />
+					) : (
+						<PostForm />
+					)}
 					<SidebarButton
 						isOpen={isOpen}
 						handleSidebarToggleBtn={handleSidebarToggleBtn}

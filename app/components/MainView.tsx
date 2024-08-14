@@ -21,6 +21,7 @@ const MainView = ({ postDataList }: Props) => {
 	const { setUniversity } = useCurUniversityStore();
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+	const [existingPost, setExistingPost] = useState<Post>();
 
 	useEffect(() => {
 		setUniversity('CAU'); // TODO: 학교별 나누기
@@ -44,10 +45,12 @@ const MainView = ({ postDataList }: Props) => {
 				lat,
 				lng,
 			});
+			setExistingPost(undefined);
 			setIsOpenSidebar(true);
 		}
 	};
-	const handleClickMarker = () => {
+	const handleClickMarker = (_: kakao.maps.Marker, post?: Post) => {
+		setExistingPost(post);
 		setIsOpenSidebar(true);
 	};
 
@@ -57,7 +60,11 @@ const MainView = ({ postDataList }: Props) => {
 				src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false`}
 				strategy="beforeInteractive"
 			/>
-			<Sidebar isOpen={isOpenSidebar} setIsOpen={setIsOpenSidebar} />
+			<Sidebar
+				isOpen={isOpenSidebar}
+				existingPost={existingPost}
+				setIsOpen={setIsOpenSidebar}
+			/>
 			<Map
 				center={CAUPos}
 				style={{ width: '100%', height: '100%' }}
@@ -78,7 +85,7 @@ const MainView = ({ postDataList }: Props) => {
 										height: 32,
 									},
 								}}
-								onClick={handleClickMarker}
+								onClick={(_) => handleClickMarker(_, post)}
 							/>
 						);
 					}
