@@ -16,7 +16,7 @@ type Props = {
 
 const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 	const [editMode, setEditMode] = useState(false);
-
+	// nav 현재 버튼 표시
 	const handleSidebarToggleBtn = () => {
 		setIsOpen(!isOpen);
 		setEditMode(false);
