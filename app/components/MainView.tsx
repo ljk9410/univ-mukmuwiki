@@ -11,7 +11,7 @@ import {
 } from '../store/restaurantStore';
 import { Post } from '../lib/types';
 
-const CAUPos = { lat: 37.504647, lng: 126.957073 };
+const CAUPos = { lat: 37.5043, lng: 126.9568 };
 
 interface Props {
 	postDataList: Post[];
@@ -69,7 +69,7 @@ const MainView = ({ postDataList }: Props) => {
 				center={CAUPos}
 				style={{ width: '100%', height: '100%' }}
 				level={3}
-				minLevel={4}
+				minLevel={5}
 				onClick={handleClickMap}
 			>
 				<MapMarker position={CAUPos} onClick={handleClickMarker} />

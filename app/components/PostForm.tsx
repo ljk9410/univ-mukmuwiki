@@ -5,6 +5,7 @@ import {
 	useCurSelectedPosStore,
 	useCurUniversityStore,
 } from '../store/restaurantStore';
+import { CameraIcon } from '@heroicons/react/24/outline';
 
 const PostForm = () => {
 	// TODO: 처음 눌렀을 때 해당 데이터는 없어요! 추가해주시겠어요? 라는 단계 추가하기, 편집모드로 구분하기
@@ -48,13 +49,14 @@ const PostForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="w-full h-full bg-red-100 flex flex-col overflow-scroll"
+			className="w-full h-full flex flex-col overflow-scroll"
 		>
-			<div className="w-full h-[200px]">
-				<p>이미지</p>
-			</div>
+			<button className="w-full h-[180px] flex flex-col justify-center items-center border-b-[1px] border-gray-300">
+				<CameraIcon className="w-[32px] mb-2" />
+				<p className="text-[14px]">대표 사진을 추가해주세요</p>
+			</button>
 
-			<div className="w-full">
+			<div className="w-full p-4">
 				<label
 					htmlFor="name"
 					className="block text-gray-700 text-sm font-bold mb-2"
@@ -67,12 +69,10 @@ const PostForm = () => {
 					id="name"
 					value={postData.name}
 					onChange={handleChangeText}
-					className="w-full px-3 py-2 mb-3 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-					placeholder="가게 이름을 입력하세요"
+					className="w-full px-3 py-2 mb-7 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+					placeholder="가게 이름을 입력해주세요"
 				/>
-			</div>
 
-			<div className="w-full">
 				<label
 					htmlFor="address"
 					className="block text-gray-700 text-sm font-bold mb-2"
@@ -85,12 +85,10 @@ const PostForm = () => {
 					id="address"
 					value={postData.address}
 					onChange={handleChangeText}
-					className="w-full px-3 py-2 mb-3 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+					className="w-full px-3 py-2 mb-7 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 					placeholder="주소를 알려주세요"
 				/>
-			</div>
 
-			<div className="w-full">
 				<label
 					htmlFor="content"
 					className="block text-gray-700 text-sm font-bold mb-2"
@@ -102,16 +100,17 @@ const PostForm = () => {
 					id="content"
 					value={postData.content}
 					onChange={handleChangeText}
+					rows={8}
 					className="w-full px-3 py-2 mb-3 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-					placeholder="다양한 정보를 자유롭게 입력해주세요"
+					placeholder="알고 있는 정보를 자유롭게 입력해주세요"
 				/>
+				<button
+					type="submit"
+					className="w-full bg-[#0675F4] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+				>
+					제출하기
+				</button>
 			</div>
-			<button
-				type="submit"
-				className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-			>
-				제출하기
-			</button>
 		</form>
 	);
 };

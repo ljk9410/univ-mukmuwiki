@@ -30,13 +30,8 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 				} border-r-[1px] border-gray-300`}
 			>
 				<h1>
-					<button className="py-3 border-b-[1px] border-gray-300">
-						<Image
-							src={'/cau_logo.png'}
-							width={100}
-							height={100}
-							alt="university logo"
-						/>
+					<button className="py-3 border-t-[1px] border-gray-300">
+						<p>로고 박스</p>
 					</button>
 				</h1>
 				<nav className="w-full">
@@ -55,6 +50,16 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 						</li>
 					</ol>
 				</nav>
+				<footer>
+					<button className="absolute w-full left-0 bottom-0 py-3 border-t-[1px] border-gray-300">
+						<Image
+							src={'/cau_logo.png'}
+							width={100}
+							height={100}
+							alt="university logo"
+						/>
+					</button>
+				</footer>
 			</header>
 
 			<Transition
