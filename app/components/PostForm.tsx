@@ -117,7 +117,7 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 					value={postData.address}
 					onChange={handleChangeText}
 					className="w-full px-3 py-2 mb-7 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-					placeholder="주소를 알려주세요"
+					placeholder="주소를 입력해주세요"
 				/>
 
 				<label
@@ -145,7 +145,7 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 						type="submit"
 						className="w-full bg-[#0675F4] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 					>
-						{existingPost ? '수정하기' : '제출하기'}
+						{existingPost ? '수정하기' : '공유하기'}
 					</button>
 				)}
 			</div>

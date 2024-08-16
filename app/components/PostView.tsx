@@ -10,10 +10,10 @@ type Props = {
 const PostView = ({ post, setEditMode }: Props) => {
 	return (
 		<div className="w-full h-full flex flex-col overflow-scroll">
-			<button className="w-full h-[180px] flex flex-col justify-center items-center border-b-[1px] border-gray-300">
+			<div className="w-full h-[180px] flex flex-col justify-center items-center border-b-[1px] border-gray-300">
 				<CameraIcon className="w-[32px] mb-2" />
 				<p className="text-[14px]">대표 사진이 없어요</p>
-			</button>
+			</div>
 			<div className="relative w-full p-4">
 				<h2 className="text-[20px] mb-2">{post.name}</h2>
 				<div className="flex items-center">
