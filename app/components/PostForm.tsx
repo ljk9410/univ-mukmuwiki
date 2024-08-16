@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Post } from '../lib/types';
 import { addPostData, updatePostData } from '../api/postAPI';
 import {
@@ -7,9 +7,13 @@ import {
 } from '../store/restaurantStore';
 import { CameraIcon } from '@heroicons/react/24/outline';
 
-const PostForm = () => {
-	// TODO: 처음 눌렀을 때 해당 데이터는 없어요! 추가해주시겠어요? 라는 단계 추가하기, 편집모드로 구분하기
+type Props = {
+	editMode: boolean;
+	existingPost?: Post;
+	setEditMode: (mode: boolean) => void;
+};
 
+const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 	const { university } = useCurUniversityStore();
 	const { curSelectedPos } = useCurSelectedPosStore();
 	const [postData, setPostData] = useState<Post>({
@@ -45,6 +49,33 @@ const PostForm = () => {
 			// TODO: 에러 추적 기능 넣기
 		}
 	};
+
+	useEffect(() => {
+		if (existingPost) {
+			setPostData(existingPost);
+		}
+	}, []);
+
+	if (!existingPost && !editMode) {
+		return (
+			<div className="w-full flex flex-col justify-center items-center px-3">
+				<h3 className="text-[18px] font-bold">
+					아직 해당 맛집의 정보가 없어요😋
+				</h3>
+				<div className="flex flex-col items-center text-[14px] mt-4 mb-8">
+					<p>우리 대학 주변의 맛집을 가장 잘 아는 당신!</p>
+					<p>내가 자주 가는 대학 주변 맛집이 있다면?</p>
+					<p>'우리 대학 먹무위키'에 남겨서 사람들과 공유해봐요!</p>
+				</div>
+				<button
+					onClick={() => setEditMode(true)}
+					className="w-full bg-[#0675F4] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+				>
+					맛집 공유하러 가기
+				</button>
+			</div>
+		);
+	}
 
 	return (
 		<form
@@ -104,12 +135,19 @@ const PostForm = () => {
 					className="w-full px-3 py-2 mb-3 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 					placeholder="알고 있는 정보를 자유롭게 입력해주세요"
 				/>
-				<button
-					type="submit"
-					className="w-full bg-[#0675F4] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-				>
-					제출하기
-				</button>
+				{!postData.name || !postData.content ? (
+					<div className="w-full flex justify-center items-center bg-gray-400 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+						입력 칸을 채워주세요
+						<span className="translate-y-[0.5px] translate-x-1">🙂</span>
+					</div>
+				) : (
+					<button
+						type="submit"
+						className="w-full bg-[#0675F4] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+					>
+						{existingPost ? '수정하기' : '제출하기'}
+					</button>
+				)}
 			</div>
 		</form>
 	);

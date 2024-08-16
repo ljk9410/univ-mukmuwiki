@@ -73,11 +73,19 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 			>
 				<aside className="fixed z-10 left-16 top-0 h-full w-[384px] bg-slate-50 shadow-right flex">
 					{editMode ? (
-						<PostForm />
+						<PostForm
+							existingPost={existingPost}
+							editMode={editMode}
+							setEditMode={setEditMode}
+						/>
 					) : existingPost ? (
 						<PostView post={existingPost} setEditMode={setEditMode} />
 					) : (
-						<PostForm />
+						<PostForm
+							existingPost={existingPost}
+							editMode={editMode}
+							setEditMode={setEditMode}
+						/>
 					)}
 					<SidebarButton
 						isOpen={isOpen}

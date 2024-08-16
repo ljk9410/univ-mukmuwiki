@@ -49,6 +49,7 @@ const MainView = ({ postDataList }: Props) => {
 			setIsOpenSidebar(true);
 		}
 	};
+
 	const handleClickMarker = (_: kakao.maps.Marker, post?: Post) => {
 		setExistingPost(post);
 		setIsOpenSidebar(true);
@@ -81,8 +82,8 @@ const MainView = ({ postDataList }: Props) => {
 								image={{
 									src: '/icon-192x192.png', // 커스텀 마커
 									size: {
-										width: 32,
-										height: 32,
+										width: 24,
+										height: 24,
 									},
 								}}
 								onClick={(_) => handleClickMarker(_, post)}
@@ -96,8 +97,8 @@ const MainView = ({ postDataList }: Props) => {
 						image={{
 							src: '/icon-192x192.png', // TODO: 아이콘 이미지 변경
 							size: {
-								width: 32,
-								height: 32,
+								width: 24,
+								height: 24,
 							},
 						}}
 						onClick={handleClickMarker}
