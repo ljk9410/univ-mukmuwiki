@@ -132,7 +132,6 @@ const MainView = ({ postDataList }: Props) => {
 							height: 80,
 						},
 					}}
-					onClick={handleClickMarker}
 				/>
 			</Map>
 		</>
