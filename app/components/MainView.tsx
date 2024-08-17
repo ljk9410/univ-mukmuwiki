@@ -51,8 +51,16 @@ const MainView = ({ postDataList }: Props) => {
 	};
 
 	const handleClickMarker = (_: kakao.maps.Marker, post?: Post) => {
-		setExistingPost(post);
-		setIsOpenSidebar(true);
+		if (!post) {
+			setCurSelectedPos({
+				lat: 0,
+				lng: 0,
+			});
+			setIsOpenSidebar(false);
+		} else {
+			setExistingPost(post);
+			setIsOpenSidebar(true);
+		}
 	};
 
 	return (
@@ -73,17 +81,22 @@ const MainView = ({ postDataList }: Props) => {
 				minLevel={5}
 				onClick={handleClickMap}
 			>
-				<MapMarker position={CAUPos} onClick={handleClickMarker} />
 				{postDataList.map((post) => {
 					if (post.latLng) {
 						return (
 							<MapMarker
 								position={post.latLng}
 								image={{
-									src: '/icon-192x192.png', // 커스텀 마커
+									src: '/puang_yum.png',
 									size: {
-										width: 24,
-										height: 24,
+										width: 54,
+										height: 40,
+									},
+									options: {
+										offset: {
+											x: 27,
+											y: 20,
+										},
 									},
 								}}
 								onClick={(_) => handleClickMarker(_, post)}
@@ -95,15 +108,32 @@ const MainView = ({ postDataList }: Props) => {
 					<MapMarker
 						position={curSelectedPos}
 						image={{
-							src: '/icon-192x192.png', // TODO: 아이콘 이미지 변경
+							src: '/puang_search.png',
 							size: {
-								width: 24,
-								height: 24,
+								width: 80,
+								height: 60,
+							},
+							options: {
+								offset: {
+									x: 40,
+									y: 40,
+								},
 							},
 						}}
 						onClick={handleClickMarker}
 					/>
 				)}
+				<MapMarker
+					position={CAUPos}
+					image={{
+						src: '/puang.png',
+						size: {
+							width: 60,
+							height: 80,
+						},
+					}}
+					onClick={handleClickMarker}
+				/>
 			</Map>
 		</>
 	);
