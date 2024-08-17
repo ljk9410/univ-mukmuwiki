@@ -29,11 +29,14 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 					!isOpen ? 'shadow-right' : 'border-r-[1px] border-t-slate-950'
 				} border-r-[1px] border-gray-300`}
 			>
-				<h1>
-					<button className="py-3 border-t-[1px] border-gray-300">
-						<p>로고 박스</p>
-					</button>
-				</h1>
+				<button className="py-2 border-b-[1px] border-gray-300">
+					<Image
+						width={64}
+						height={64}
+						src={'/logo.png'}
+						alt="우리 대학 먹무위키 로고"
+					/>
+				</button>
 				<nav className="w-full">
 					<ol>
 						<li>
