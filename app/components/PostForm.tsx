@@ -58,6 +58,28 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const geocoder = new kakao.maps.services.Geocoder();
+		new kakao.maps.LatLng(curSelectedPos.lat, curSelectedPos.lng);
+		const callback = function (result: any, status: any) {
+			if (status === kakao.maps.services.Status.OK) {
+				if (result[0]?.road_address?.address_name) {
+					setPostData({
+						...postData,
+						address: result[0].road_address.address_name,
+					});
+				} else {
+					setPostData({
+						...postData,
+						address: result[0].address.address_name,
+					});
+				}
+			}
+		};
+
+		geocoder.coord2Address(curSelectedPos.lng, curSelectedPos.lat, callback);
+	}, [curSelectedPos]);
+
 	if (!existingPost && !editMode) {
 		return (
 			<div className="w-full flex flex-col justify-center items-center px-3">

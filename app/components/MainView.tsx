@@ -1,6 +1,5 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Sidebar from './Sidebar';
@@ -21,11 +20,7 @@ const MainView = ({ postDataList }: Props) => {
 	const { setUniversity } = useCurUniversityStore();
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-	const [existingPost, setExistingPost] = useState<Post>();
-
-	useEffect(() => {
-		setUniversity('CAU'); // TODO: 학교별 나누기
-	}, []);
+	const [existingPost, setExistingPost] = useState<Post>(); // TODO: Post Data 관리 방식 리펙토링
 
 	const handleClickMap = (_: any, mouseEvent: kakao.maps.event.MouseEvent) => {
 		if (!mouseEvent.latLng) return;
@@ -63,12 +58,12 @@ const MainView = ({ postDataList }: Props) => {
 		}
 	};
 
+	useEffect(() => {
+		setUniversity('CAU'); // TODO: 학교별 나누기
+	}, []);
+
 	return (
 		<>
-			<Script
-				src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false`}
-				strategy="beforeInteractive"
-			/>
 			<Sidebar
 				isOpen={isOpenSidebar}
 				existingPost={existingPost}

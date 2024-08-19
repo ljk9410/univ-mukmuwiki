@@ -16,9 +16,14 @@ type Props = {
 
 const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 	const [editMode, setEditMode] = useState(false);
-	// nav 현재 버튼 표시
+
 	const handleSidebarToggleBtn = () => {
 		setIsOpen(!isOpen);
+		setEditMode(false);
+	};
+
+	const handleMapNavBtn = () => {
+		setIsOpen(false);
 		setEditMode(false);
 	};
 
@@ -40,17 +45,17 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 				<nav className="w-full">
 					<ol>
 						<li>
-							<button className={styles.navButton}>
+							<button className={styles.navButton} onClick={handleMapNavBtn}>
 								<MapIcon className={styles.navButtonIcon} />
 								<p className={styles.navButtonText}>지도</p>
 							</button>
 						</li>
-						<li>
+						{/* <li>
 							<button className={styles.navButton}>
 								<ListBulletIcon className={styles.navButtonIcon} />
 								<p className={styles.navButtonText}>리스트</p>
 							</button>
-						</li>
+						</li> */}
 					</ol>
 				</nav>
 				<footer>
