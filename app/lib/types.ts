@@ -16,6 +16,11 @@ export interface Post {
 	university: string;
 }
 
+export interface MediaState {
+	isMobile: boolean;
+	setIsMobile: (isMobile: boolean) => void;
+}
+
 export interface UniversityState {
 	university: string;
 	setUniversity: (university: string) => void;

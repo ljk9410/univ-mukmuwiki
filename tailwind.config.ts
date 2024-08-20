@@ -16,6 +16,7 @@ const config: Config = {
 			boxShadow: {
 				right:
 					'2px 0 15px -3px rgba(0, 0, 0, 0.1), 4px 0 6px -2px rgba(0, 0, 0, 0.05)', // 오른쪽 그림자
+				bottom: '0px 4px 6px -4px rgba(0, 0, 0, 0.5)',
 			},
 		},
 	},

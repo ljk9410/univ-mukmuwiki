@@ -10,6 +10,7 @@ import {
 } from '../store/restaurantStore';
 import { Post } from '../lib/types';
 import IntroductionModal from './IntroductionModal';
+import { useMediaStore } from '../store/mediaStore';
 
 const CAUPos = { lat: 37.5043, lng: 126.9568 };
 
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const MainView = ({ postDataList }: Props) => {
+	const { setIsMobile } = useMediaStore();
 	const { setUniversity } = useCurUniversityStore();
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -59,6 +61,16 @@ const MainView = ({ postDataList }: Props) => {
 			setIsOpenSidebar(true);
 		}
 	};
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia('(max-width: 640px)');
+		const handleResize = () => setIsMobile(mediaQuery.matches);
+
+		setIsMobile(mediaQuery.matches);
+		mediaQuery.addEventListener('change', handleResize);
+
+		return () => mediaQuery.removeEventListener('change', handleResize);
+	}, []);
 
 	useEffect(() => {
 		setUniversity('CAU'); // TODO: 학교별 나누기

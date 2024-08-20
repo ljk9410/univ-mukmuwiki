@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Post } from '../lib/types';
 import { addPostData, updatePostData } from '../api/postAPI';
 import {
@@ -59,30 +59,52 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 	}, []);
 
 	useEffect(() => {
-		const geocoder = new kakao.maps.services.Geocoder();
-		new kakao.maps.LatLng(curSelectedPos.lat, curSelectedPos.lng);
-		const callback = function (result: any, status: any) {
-			if (status === kakao.maps.services.Status.OK) {
-				if (result[0]?.road_address?.address_name) {
-					setPostData({
-						...postData,
-						address: result[0].road_address.address_name,
-					});
-				} else {
-					setPostData({
-						...postData,
-						address: result[0].address.address_name,
-					});
-				}
+		const loadKakaoMaps = () => {
+			if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
+				const geocoder = new window.kakao.maps.services.Geocoder();
+				new window.kakao.maps.LatLng(curSelectedPos.lat, curSelectedPos.lng);
+
+				const callback = function (result: any, status: any) {
+					if (status === window.kakao.maps.services.Status.OK) {
+						if (result[0]?.road_address?.address_name) {
+							setPostData({
+								...postData,
+								address: result[0].road_address.address_name,
+							});
+						} else {
+							setPostData({
+								...postData,
+								address: result[0].address.address_name,
+							});
+						}
+					}
+				};
+
+				geocoder.coord2Address(
+					curSelectedPos.lng,
+					curSelectedPos.lat,
+					callback
+				);
+			} else {
+				console.error('Kakao Maps SDK not loaded');
 			}
 		};
 
-		geocoder.coord2Address(curSelectedPos.lng, curSelectedPos.lat, callback);
+		if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
+			loadKakaoMaps();
+		} else {
+			const script = document.createElement('script');
+			script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false&libraries=services`;
+			script.async = true;
+			script.defer = true;
+			script.onload = loadKakaoMaps;
+			document.head.appendChild(script);
+		}
 	}, [curSelectedPos]);
 
 	if (!existingPost && !editMode) {
 		return (
-			<div className="w-full flex flex-col justify-center items-center px-3">
+			<div className="w-full flex flex-col justify-center items-center px-3 -translate-y-[60px] sm:translate-y-0">
 				<h3 className="text-[18px] font-bold">
 					아직 해당 맛집의 정보가 없어요😋
 				</h3>
