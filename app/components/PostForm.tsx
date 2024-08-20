@@ -104,14 +104,14 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 
 	if (!existingPost && !editMode) {
 		return (
-			<div className="w-full flex flex-col justify-center items-center px-3 -translate-y-[60px] sm:translate-y-0">
+			<div className="w-full flex flex-col justify-center items-center px-3 mb-[140px] sm:mb-0">
 				<h3 className="text-[18px] font-bold">
 					아직 해당 맛집의 정보가 없어요😋
 				</h3>
 				<div className="flex flex-col items-center text-[14px] mt-4 mb-8">
 					<p>우리 대학 주변의 맛집을 가장 잘 아는 당신!</p>
 					<p>내가 자주 가는 우리 대학 주변 맛집이 있다면?</p>
-					<p>{`'우리 대학 먹무위키'에 남겨서 사람들과 공유해봐요!`}</p>
+					<p>&apos;우리 대학 먹무위키&apos;에 남겨서 사람들과 공유해봐요!</p>
 				</div>
 				<button
 					onClick={() => setEditMode(true)}

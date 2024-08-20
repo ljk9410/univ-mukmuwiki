@@ -128,6 +128,8 @@ const MainView = ({ postDataList }: Props) => {
 								onClick={(_) => handleClickMarker(_, post)}
 							/>
 						);
+					} else {
+						return null;
 					}
 				})}
 				{curSelectedPos && (
