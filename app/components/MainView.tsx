@@ -19,7 +19,7 @@ interface Props {
 }
 
 const MainView = ({ postDataList }: Props) => {
-	const { setIsMobile } = useMediaStore();
+	const { isMobile, setIsMobile } = useMediaStore();
 	const { setUniversity } = useCurUniversityStore();
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -103,7 +103,7 @@ const MainView = ({ postDataList }: Props) => {
 				center={CAUPos}
 				style={{ width: '100%', height: '100%' }}
 				level={3}
-				minLevel={5}
+				minLevel={isMobile ? 6 : 5}
 				onClick={handleClickMap}
 			>
 				{postDataList.map((post) => {
