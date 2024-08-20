@@ -70,22 +70,20 @@ const Sidebar = ({
 						</li> */}
 					</ol>
 				</nav>
-				<footer>
-					<button
-						className={
-							isMobile
-								? 'w-[64px] h-full'
-								: 'absolute w-full left-0 bottom-0 py-3 border-t-[1px] border-gray-300'
-						}
-					>
-						<Image
-							src={'/cau_logo.png'}
-							width={100}
-							height={100}
-							alt="university logo"
-						/>
-					</button>
-				</footer>
+				<button
+					className={
+						isMobile
+							? 'w-[64px] h-[64px] p-0'
+							: 'absolute w-full left-0 bottom-0 py-3 border-t-[1px] border-gray-300'
+					}
+				>
+					<Image
+						src={'/cau_logo.png'}
+						width={100}
+						height={100}
+						alt="university logo"
+					/>
+				</button>
 			</header>
 
 			{isMobile ? (

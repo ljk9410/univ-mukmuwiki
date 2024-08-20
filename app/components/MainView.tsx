@@ -113,13 +113,13 @@ const MainView = ({ postDataList }: Props) => {
 								image={{
 									src: '/puang_yum.png',
 									size: {
-										width: 54,
-										height: 40,
+										width: isMobile ? 68 : 54,
+										height: isMobile ? 50 : 40,
 									},
 									options: {
 										offset: {
-											x: 27,
-											y: 20,
+											x: isMobile ? 34 : 27,
+											y: isMobile ? 25 : 20,
 										},
 									},
 								}}
