@@ -45,17 +45,15 @@ const MainView = ({ postDataList }: Props) => {
 				lng,
 			});
 			setExistingPost(undefined);
-			setIsOpenSidebar(true);
+			if (!isMobile) {
+				setIsOpenSidebar(true);
+			}
 		}
 	};
 
 	const handleClickMarker = (_: kakao.maps.Marker, post?: Post) => {
 		if (!post) {
-			setCurSelectedPos({
-				lat: 0,
-				lng: 0,
-			});
-			setIsOpenSidebar(false);
+			setIsOpenSidebar(true);
 		} else {
 			setExistingPost(post);
 			setIsOpenSidebar(true);
