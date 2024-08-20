@@ -111,7 +111,7 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 				<div className="flex flex-col items-center text-[14px] mt-4 mb-8">
 					<p>우리 대학 주변의 맛집을 가장 잘 아는 당신!</p>
 					<p>내가 자주 가는 우리 대학 주변 맛집이 있다면?</p>
-					<p>'우리 대학 먹무위키'에 남겨서 사람들과 공유해봐요!</p>
+					<p>{`'우리 대학 먹무위키'에 남겨서 사람들과 공유해봐요!`}</p>
 				</div>
 				<button
 					onClick={() => setEditMode(true)}

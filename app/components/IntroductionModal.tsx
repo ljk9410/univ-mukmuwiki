@@ -63,8 +63,8 @@ const IntroductionModal = ({ showModal, onClose }: Props) => {
 					className="break-words whitespace-normal text-center sm:leading-8 leading-7 sm:text-[16px] text-[14px] text-gray-700"
 				>
 					<p className="mb-4">
-						먹무위키는 "우리 대학 숨은 찐맛집은 우리 학교 사람들이 잘 알지
-						않을까?" 라는 아이디어에서 시작했어요.
+						{`먹무위키는 "우리 대학 숨은 찐맛집은 우리 학교 사람들이 잘 알지
+						않을까?" 라는 아이디어에서 시작했어요.`}
 					</p>
 					<p className="mb-4">
 						다른 맛집 리스트 서비스와 달리 누구나 참여할 수 있게 만들었어요.
