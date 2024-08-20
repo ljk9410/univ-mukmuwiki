@@ -11,13 +11,13 @@ const PostModal = ({ showModal, onClose, onConfirm }: Props) => {
 
 	return (
 		<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-			<div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
-				<h3 className="text-[24px] font-semibold mb-4 text-center">
+			<div className="bg-white p-6 rounded-lg shadow-lg sm:max-w-lg w-full max-w-sm">
+				<h3 className="sm:text-[24px] text-[22px] font-semibold mb-4 text-center">
 					작성을 완료할까요?
 				</h3>
 				<p
 					style={{ wordBreak: 'keep-all' }}
-					className="break-words whitespace-normal mb-6 text-center"
+					className="break-words whitespace-normal mb-6 text-center sm:text-[16px] text-[14px]"
 				>
 					먹무위키는 모두가 쉽게 참여할 수 있는 열린 지식의 공간이자, 함께
 					가꾸어 나가는 소중한 터전이에요. 비속어, 음란물 등 부적절한 콘텐츠가

@@ -110,6 +110,7 @@ const MainView = ({ postDataList }: Props) => {
 					if (post.latLng) {
 						return (
 							<MapMarker
+								key={post.id}
 								position={post.latLng}
 								image={{
 									src: '/puang_yum.png',
