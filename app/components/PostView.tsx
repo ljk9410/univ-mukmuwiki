@@ -20,7 +20,7 @@ const PostView = ({ post, setEditMode }: Props) => {
 					<MapPinIcon className="w-[18px] text-gray-400 mr-1" />
 					<p className="text-[14px]">{post.address}</p>
 				</div>
-				<p className="pt-12">{post.content}</p>
+				<pre className="pt-12 text-[14px]">{post.content}</pre>
 				<button
 					className="absolute right-2 top-3 w-8 h-8 flex justify-center items-center group"
 					onClick={() => setEditMode(true)}

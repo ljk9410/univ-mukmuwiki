@@ -7,23 +7,31 @@ import { Post } from '../lib/types';
 import Image from 'next/image';
 import { ListBulletIcon, MapIcon } from '@heroicons/react/24/solid';
 import classNames from 'classnames';
+import { useCurSelectedPosStore } from '../store/restaurantStore';
+import IntroductionModal from './IntroductionModal';
 
 type Props = {
 	isOpen: boolean;
 	existingPost: Post | undefined;
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
+	setShowIntroductionModal: Dispatch<SetStateAction<boolean>>;
 };
 
-const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
+const Sidebar = ({
+	isOpen,
+	existingPost,
+	setIsOpen,
+	setShowIntroductionModal,
+}: Props) => {
+	const { setCurSelectedPos } = useCurSelectedPosStore();
 	const [editMode, setEditMode] = useState(false);
 
-	const handleSidebarToggleBtn = () => {
-		setIsOpen(!isOpen);
-		setEditMode(false);
-	};
-
-	const handleMapNavBtn = () => {
+	const initMapState = () => {
 		setIsOpen(false);
+		setCurSelectedPos({
+			lat: 0,
+			lng: 0,
+		});
 		setEditMode(false);
 	};
 
@@ -34,7 +42,10 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 					!isOpen ? 'shadow-right' : 'border-r-[1px] border-t-slate-950'
 				} border-r-[1px] border-gray-300`}
 			>
-				<button className="py-2 border-b-[1px] border-gray-300">
+				<button
+					className="py-2 border-b-[1px] border-gray-300"
+					onClick={() => setShowIntroductionModal(true)}
+				>
 					<Image
 						width={64}
 						height={64}
@@ -45,7 +56,7 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 				<nav className="w-full">
 					<ol>
 						<li>
-							<button className={styles.navButton} onClick={handleMapNavBtn}>
+							<button className={styles.navButton} onClick={initMapState}>
 								<MapIcon className={styles.navButtonIcon} />
 								<p className={styles.navButtonText}>지도</p>
 							</button>
@@ -97,7 +108,7 @@ const Sidebar = ({ isOpen, existingPost, setIsOpen }: Props) => {
 					)}
 					<SidebarButton
 						isOpen={isOpen}
-						handleSidebarToggleBtn={handleSidebarToggleBtn}
+						handleSidebarToggleBtn={initMapState}
 					/>
 				</aside>
 			</Transition>

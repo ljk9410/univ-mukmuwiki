@@ -112,7 +112,11 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 				className="w-full h-full flex flex-col overflow-scroll"
 				onSubmit={handleSubmit}
 			>
-				<button className="w-full h-[180px] flex flex-col justify-center items-center border-b-[1px] border-gray-300">
+				<button
+					type="button"
+					className="w-full h-[180px] flex flex-col justify-center items-center border-b-[1px] border-gray-300"
+					onClick={() => alert('현재 준비 중인 기능입니다🙂')}
+				>
 					<CameraIcon className="w-[32px] mb-2" />
 					<p className="text-[14px]">대표 사진을 추가해주세요</p>
 				</button>
@@ -166,7 +170,7 @@ const PostForm = ({ editMode, existingPost, setEditMode }: Props) => {
 					/>
 					{!postData.name || !postData.content ? (
 						<div className="w-full flex justify-center items-center bg-gray-400 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-							입력 칸을 채워주세요
+							입력 칸을 모두 채워주세요
 							<span className="translate-y-[0.5px] translate-x-1">🙂</span>
 						</div>
 					) : (

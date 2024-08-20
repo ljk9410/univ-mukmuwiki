@@ -9,6 +9,7 @@ import {
 	useCurUniversityStore,
 } from '../store/restaurantStore';
 import { Post } from '../lib/types';
+import IntroductionModal from './IntroductionModal';
 
 const CAUPos = { lat: 37.5043, lng: 126.9568 };
 
@@ -21,6 +22,7 @@ const MainView = ({ postDataList }: Props) => {
 	const { curSelectedPos, setCurSelectedPos } = useCurSelectedPosStore();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 	const [existingPost, setExistingPost] = useState<Post>(); // TODO: Post Data 관리 방식 리펙토링
+	const [showIntroductionModal, setShowIntroductionModal] = useState(false);
 
 	const handleClickMap = (_: any, mouseEvent: kakao.maps.event.MouseEvent) => {
 		if (!mouseEvent.latLng) return;
@@ -62,12 +64,28 @@ const MainView = ({ postDataList }: Props) => {
 		setUniversity('CAU'); // TODO: 학교별 나누기
 	}, []);
 
+	useEffect(() => {
+		const firstOpenData = localStorage.getItem('firstOpen');
+
+		if (!firstOpenData) {
+			setShowIntroductionModal(true);
+		}
+	}, []);
+
 	return (
 		<>
 			<Sidebar
 				isOpen={isOpenSidebar}
 				existingPost={existingPost}
 				setIsOpen={setIsOpenSidebar}
+				setShowIntroductionModal={setShowIntroductionModal}
+			/>
+			<IntroductionModal
+				showModal={showIntroductionModal}
+				onClose={() => {
+					setShowIntroductionModal(false);
+					localStorage.setItem('firstOpen', 'true');
+				}}
 			/>
 			<Map
 				center={CAUPos}
