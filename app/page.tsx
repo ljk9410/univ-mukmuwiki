@@ -1,7 +1,7 @@
 import { getPostData } from './api/postAPI';
 import MainView from './components/MainView';
 
-export const revalidate = 10; // 10초마다 페이지를 갱신
+export const revalidate = 0;
 
 export default async function Home() {
 	const postDataList = await getPostData('post'); // TODO: try catch 걸기
